@@ -1,0 +1,20 @@
+version: "3.5"
+services:
+  db-server:
+    restart: always
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    networks:
+      - fwdays-network
+    ports:
+      - '5446:5432'
+    volumes:
+      - 'postgres:/var/lib/psql'
+
+networks:
+  fwdays-network:
+    driver: overlay
+
+volumes:
+  postgres:
